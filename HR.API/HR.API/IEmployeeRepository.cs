@@ -1,4 +1,6 @@
-﻿namespace HR.API
+﻿using HR.API.Models;
+
+namespace HR.API
 {
     public interface IEmployeeRepository
     {

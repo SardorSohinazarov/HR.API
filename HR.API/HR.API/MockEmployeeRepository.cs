@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using HR.API.Models;
+using System.Collections.Concurrent;
 
 namespace HR.API
 {
