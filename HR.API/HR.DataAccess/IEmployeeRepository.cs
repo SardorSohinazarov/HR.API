@@ -1,6 +1,7 @@
-﻿using HR.API.Models;
+﻿using HR.DataAccess;
+using HR.DataAccess.Entities;
 
-namespace HR.API
+namespace HR.DataAccess
 {
     public interface IEmployeeRepository
     {

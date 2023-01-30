@@ -1,7 +1,7 @@
-﻿using HR.API.Models;
+﻿using HR.DataAccess.Entities;
 using System.Collections.Concurrent;
 
-namespace HR.API
+namespace HR.DataAccess
 {
     public  class MockEmployeeRepository : IEmployeeRepository
     {

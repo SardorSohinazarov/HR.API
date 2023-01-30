@@ -1,4 +1,5 @@
 ﻿using HR.API.Models;
+using HR.API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,43 +9,43 @@ namespace HR.API.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private readonly IEmployeeRepository _employeeRepository;
+        private readonly IGenericCRUDService<EmployeeModel> _employeeSvc;
 
-        public EmployeeController(IEmployeeRepository employeeRepository)
+        public EmployeeController(IGenericCRUDService<EmployeeModel> employeeSvc)
         {
-            _employeeRepository = employeeRepository;
+            _employeeSvc = employeeSvc;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await _employeeRepository.GetEmployees());
+            return Ok(await _employeeSvc.GetAll());
         }
 
         [HttpGet("employee")]
         public async Task<IActionResult> GetById(int id)
         {
-            return Ok(await _employeeRepository.GetEmployee(id));
+            return Ok(await _employeeSvc.Get(id));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]Employee employee)
+        public async Task<IActionResult> Post([FromBody]EmployeeModel employee)
         {
-            var createdEmployee = await _employeeRepository.CreateEmployee(employee);
+            var createdEmployee = await _employeeSvc.Create(employee);
             var routeValue = new {id =  createdEmployee.Id};    
             return CreatedAtRoute(routeValue, createdEmployee);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put(int id, [FromBody]Employee employee)
+        public async Task<IActionResult> Put(int id, [FromBody]EmployeeModel employee)
         {
-            return Ok(await _employeeRepository.UpdateEmployee(id, employee));
+            return Ok(await _employeeSvc.Update(id, employee));
         }
 
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
-            bool result = await _employeeRepository.DeleteEmployee(id);
+            bool result = await _employeeSvc.Delete(id);
             if (result)
                 return NoContent();
             else
