@@ -14,4 +14,6 @@ public class EmployeeModel
     [Required]
     [EmailAddress]
     public string Email { get; set; }
+
+    public decimal Salary { get; set; }
 }

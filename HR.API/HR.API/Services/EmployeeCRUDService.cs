@@ -19,7 +19,8 @@ namespace HR.API.Services
                 Id = employeeModel.Id,
                 FullName = employeeModel.FullName,
                 Department = employeeModel.Department,
-                Email = employeeModel.Email
+                Email = employeeModel.Email,
+                Salary = employeeModel.Salary
             };
             var createdEmployee = await _employeeRepository.CreateEmployee(employee);
             var createEmployeeModel = new EmployeeModel
@@ -27,7 +28,8 @@ namespace HR.API.Services
                 Id = createdEmployee.Id,
                 FullName = createdEmployee.FullName,
                 Department = createdEmployee.Department,
-                Email = createdEmployee.Email
+                Email = createdEmployee.Email,
+                Salary = createdEmployee.Salary
             };
             return createEmployeeModel;
         }
@@ -45,7 +47,8 @@ namespace HR.API.Services
                 Id = employee.Id,
                 FullName = employee.FullName,
                 Department = employee.Department,
-                Email = employee.Email
+                Email = employee.Email,
+                Salary = employee.Salary
             };
             return model;
         }
@@ -61,7 +64,8 @@ namespace HR.API.Services
                     Id = employee.Id,
                     FullName = employee.FullName,
                     Department = employee.Department,
-                    Email = employee.Email
+                    Email = employee.Email,
+                    Salary = employee.Salary
                 };
                 result.Add(employeeModel);  
             }
@@ -72,10 +76,11 @@ namespace HR.API.Services
         {
             var employee = new Employee
             {
-                Id = employeeModel.Id,
+                Id = id,
                 FullName = employeeModel.FullName,
                 Department = employeeModel.Department,
-                Email = employeeModel.Email
+                Email = employeeModel.Email,
+                Salary = employeeModel.Salary
             };
             var updatedemployee = await _employeeRepository.UpdateEmployee(id, employee);
             var updatedEmployeeModel = new EmployeeModel
@@ -83,7 +88,8 @@ namespace HR.API.Services
                 Id = updatedemployee.Id,
                 FullName = updatedemployee.FullName,
                 Department = updatedemployee.Department,
-                Email = updatedemployee.Email
+                Email = updatedemployee.Email,
+                Salary = updatedemployee.Salary
             };
             return updatedEmployeeModel;
         }
