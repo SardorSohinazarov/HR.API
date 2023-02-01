@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HR.DataAccess.Repository;
 
-public class EmployeeRepository : IEmployeeRepository
+public class EmployeeRepository : IGenericRepository<Employee>
 {
     private readonly AppDbContext _appDbContext;
     public EmployeeRepository(AppDbContext appDbContext)
@@ -11,15 +11,14 @@ public class EmployeeRepository : IEmployeeRepository
         _appDbContext = appDbContext;
     }
 
-
-    public async Task<Employee> CreateEmployee(Employee employee)
+    public async Task<Employee> Create(Employee employee)
     {
         await _appDbContext.Employees.AddAsync(employee);
         await _appDbContext.SaveChangesAsync();
         return employee;
     }
 
-    public async Task<bool> DeleteEmployee(int id)
+    public async Task<bool> Delete(int id)
     {
         var employee = await _appDbContext.Employees.FindAsync(id);
         if (employee is null)
@@ -29,17 +28,16 @@ public class EmployeeRepository : IEmployeeRepository
         return true;
     }
 
-    public async Task<Employee> GetEmployee(int id)
+    public async Task<Employee> Get(int id)
     {
         return await _appDbContext.Employees.FindAsync(id);
     }
 
-    public async Task<IEnumerable<Employee>> GetEmployees()
+    public async Task<IEnumerable<Employee>> GetAll()
     {
         return await _appDbContext.Employees.ToListAsync();
     }
-
-    public async Task<Employee> UpdateEmployee(int id, Employee employee)
+    public async Task<Employee> Update(int id, Employee employee)
     {
         var updatedEmployee = _appDbContext.Employees.Attach(employee);
         updatedEmployee.State = EntityState.Modified;

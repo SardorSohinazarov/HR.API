@@ -14,8 +14,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+builder.Services.AddScoped<IGenericRepository<Employee>, EmployeeRepository>();
+builder.Services.AddScoped<IGenericRepository<Address>, AddressRepository>();
 
 var app = builder.Build();
 

@@ -6,22 +6,14 @@ namespace HR.API.Services;
 
 public class AddressCRUDService: IGenericCRUDService<AddressModel>
 {
-    private readonly IAddressRepository _addressRepository;
-    public AddressCRUDService(IAddressRepository addressRepository)
+    private readonly IGenericRepository<Address> _addressRepository;
+    public AddressCRUDService(IGenericRepository<Address> addressRepository)
     {
         _addressRepository = addressRepository;
     }
 
     public async Task<AddressModel> Create(AddressModel addressModel)
     {
-        /*    
-    public int Id { get; set; } 
-    public string AddressLine1 { get; set; }
-    public string AddressLine2 { get; set; }
-    public string PostalCode { get; set; }
-    public string City { get; set; }
-    public string Country { get; set; }*/
-
         var address = new Address
         {
             Id = addressModel.Id,
@@ -31,7 +23,7 @@ public class AddressCRUDService: IGenericCRUDService<AddressModel>
             Country = addressModel.Country,
             City = addressModel.City,
         };
-        var createdAddress = await _addressRepository.CreateAddress(address);
+        var createdAddress = await _addressRepository.Create(address);
         var createAddressModel = new AddressModel
         {
             Id = createdAddress.Id,
@@ -47,12 +39,12 @@ public class AddressCRUDService: IGenericCRUDService<AddressModel>
 
     public async Task<bool> Delete(int id)
     {
-        return await _addressRepository.DeleteAddress(id);
+        return await _addressRepository.Delete(id);
     }
 
     public async Task<AddressModel> Get(int id)
     {
-        var adress = await _addressRepository.GetAddress(id);
+        var adress = await _addressRepository.Get(id);
         var model = new AddressModel
         {
             Id = adress.Id,
@@ -67,7 +59,7 @@ public class AddressCRUDService: IGenericCRUDService<AddressModel>
 
     public async Task<IEnumerable<AddressModel>> GetAll()
     {
-        var employees = await _addressRepository.GetAddresses();
+        var employees = await _addressRepository.GetAll();
         var result = new List<AddressModel>();
         foreach (var employee in employees)
         {
@@ -96,7 +88,7 @@ public class AddressCRUDService: IGenericCRUDService<AddressModel>
             City = addressModel.City,
             Country = addressModel.Country,
         };
-        var updatedAddres = await _addressRepository.UpdateAddress(id, address);
+        var updatedAddres = await _addressRepository.Update(id, address);
         var updatedAddressModel = new AddressModel
         {
             Id = updatedAddres.Id,

@@ -6,10 +6,10 @@ namespace HR.API.Services;
 
 public class EmployeeCRUDService : IGenericCRUDService<EmployeeModel>
 {
-    private readonly IEmployeeRepository _employeeRepository;
-    private readonly IAddressRepository _addressRepository;
+    private readonly IGenericRepository<Employee> _employeeRepository;
+    private readonly IGenericRepository<Address> _addressRepository;
 
-    public EmployeeCRUDService(IEmployeeRepository employeeRepository, IAddressRepository addressRepository)
+    public EmployeeCRUDService(IGenericRepository<Employee> employeeRepository, IGenericRepository<Address> addressRepository)
     {
         _employeeRepository = employeeRepository;
         _addressRepository = addressRepository;
@@ -17,7 +17,7 @@ public class EmployeeCRUDService : IGenericCRUDService<EmployeeModel>
 
     public async Task<EmployeeModel> Create(EmployeeModel employeeModel)
     {
-        var address = await _addressRepository.GetAddress(employeeModel.AddressId);
+        var address = await _addressRepository.Get(employeeModel.AddressId);
         var employee = new Employee
         {
             Id = employeeModel.Id,
@@ -29,7 +29,7 @@ public class EmployeeCRUDService : IGenericCRUDService<EmployeeModel>
         if(employee is not null)
             employee.Address = address; 
 
-        var createdEmployee = await _employeeRepository.CreateEmployee(employee);
+        var createdEmployee = await _employeeRepository.Create(employee);
         var createEmployeeModel = new EmployeeModel
         {
             Id = createdEmployee.Id,
@@ -44,12 +44,12 @@ public class EmployeeCRUDService : IGenericCRUDService<EmployeeModel>
 
     public async Task<bool> Delete(int id)
     {
-        return await _employeeRepository.DeleteEmployee(id);
+        return await _employeeRepository.Delete(id);
     }
 
     public async Task<EmployeeModel> Get(int id)
     {
-        var employee = await _employeeRepository.GetEmployee(id);
+        var employee = await _employeeRepository.Get(id);
         var model = new EmployeeModel
         {
             Id = employee.Id,
@@ -63,7 +63,7 @@ public class EmployeeCRUDService : IGenericCRUDService<EmployeeModel>
 
     public async Task<IEnumerable<EmployeeModel>> GetAll()
     {
-        var employees = await _employeeRepository.GetEmployees();
+        var employees = await _employeeRepository.GetAll();
         var result = new List<EmployeeModel>();
         foreach(var employee in employees)
         {
@@ -90,7 +90,7 @@ public class EmployeeCRUDService : IGenericCRUDService<EmployeeModel>
             Email = employeeModel.Email,
             Salary = employeeModel.Salary,
         };
-        var updatedemployee = await _employeeRepository.UpdateEmployee(id, employee);
+        var updatedemployee = await _employeeRepository.Update(id, employee);
         var updatedEmployeeModel = new EmployeeModel
         {
             Id = updatedemployee.Id,
