@@ -1,6 +1,6 @@
 ﻿using HR.DataAccess.Entities;
 
-namespace HR.DataAccess;
+namespace HR.DataAccess.Repository;
 
 public interface IAddressRepository
 {

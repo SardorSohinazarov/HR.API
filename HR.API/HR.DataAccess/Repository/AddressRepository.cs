@@ -1,9 +1,9 @@
 ﻿using HR.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace HR.DataAccess;
+namespace HR.DataAccess.Repository;
 
-public class AddressRepository:IAddressRepository
+public class AddressRepository : IAddressRepository
 {
     private readonly AppDbContext _appDbContext;
     public AddressRepository(AppDbContext appDbContext)

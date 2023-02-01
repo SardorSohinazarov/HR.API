@@ -1,7 +1,7 @@
 ﻿using HR.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace HR.DataAccess;
+namespace HR.DataAccess.Repository;
 
 public class EmployeeRepository : IEmployeeRepository
 {

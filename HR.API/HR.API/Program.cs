@@ -1,7 +1,7 @@
 using HR.API.Models;
 using HR.API.Services;
-using HR.DataAccess;
 using HR.DataAccess.Entities;
+using HR.DataAccess.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

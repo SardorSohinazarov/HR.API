@@ -1,6 +1,6 @@
 ﻿using HR.API.Models;
 using HR.DataAccess.Entities;
-using HR.DataAccess;
+using HR.DataAccess.Repository;
 
 namespace HR.API.Services;
 

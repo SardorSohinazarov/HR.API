@@ -6,8 +6,8 @@ namespace HR.API.Services
     {
         public Task<IEnumerable<T>> GetAll();
         public Task<T> Get(int id);
-        public Task<T> Create(T employee);
-        public Task<T> Update(int id, T employee);
+        public Task<T> Create(T template);
+        public Task<T> Update(int id, T template);
         public Task<bool> Delete(int id);
     }
 }

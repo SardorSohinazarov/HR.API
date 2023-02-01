@@ -1,7 +1,6 @@
-﻿using HR.DataAccess;
-using HR.DataAccess.Entities;
+﻿using HR.DataAccess.Entities;
 
-namespace HR.DataAccess;
+namespace HR.DataAccess.Repository;
 
 public interface IEmployeeRepository
 {
