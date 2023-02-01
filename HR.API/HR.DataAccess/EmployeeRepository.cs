@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HR.DataAccess;
 
-public class SqlServerEmployeeRepository : IEmployeeRepository
+public class EmployeeRepository : IEmployeeRepository
 {
     private readonly AppDbContext _appDbContext;
-    public SqlServerEmployeeRepository(AppDbContext appDbContext)
+    public EmployeeRepository(AppDbContext appDbContext)
     {
         _appDbContext = appDbContext;
     }
