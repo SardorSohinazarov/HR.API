@@ -1,5 +1,6 @@
 ﻿using HR.API.Models;
 using HR.API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HR.API.Controllers
@@ -16,6 +17,7 @@ namespace HR.API.Controllers
         }
 
         [HttpGet]
+        [Authorize] 
         public async Task<IActionResult> GetAll()
         {
             return Ok(await _addressSvc.GetAll());
